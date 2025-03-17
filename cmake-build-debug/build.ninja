@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: JeuDeplacementVehicule
+# Project: TraitementImageBMP
 # Configurations: Debug
 # =============================================================================
 
@@ -41,49 +41,49 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = C$:/Users/souad/Desktop/2025H_INF155_03_TP2_Equipe02/2025H_INF155_03_TP2_Equipe02/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target JeuDeplacementVehicule
+# Object build statements for EXECUTABLE target TraitementImageBMP
 
 
 #############################################
-# Order-only phony target for JeuDeplacementVehicule
+# Order-only phony target for TraitementImageBMP
 
-build cmake_object_order_depends_target_JeuDeplacementVehicule: phony || .
+build cmake_object_order_depends_target_TraitementImageBMP: phony || .
 
-build CMakeFiles/JeuDeplacementVehicule.dir/tuiles.c.obj: C_COMPILER__JeuDeplacementVehicule_unscanned_Debug C$:/Users/souad/Desktop/2025H_INF155_03_TP2_Equipe02/2025H_INF155_03_TP2_Equipe02/tuiles.c || cmake_object_order_depends_target_JeuDeplacementVehicule
-  DEP_FILE = CMakeFiles\JeuDeplacementVehicule.dir\tuiles.c.obj.d
+build CMakeFiles/TraitementImageBMP.dir/tuiles.c.obj: C_COMPILER__TraitementImageBMP_unscanned_Debug C$:/Users/souad/Desktop/2025H_INF155_03_TP2_Equipe02/2025H_INF155_03_TP2_Equipe02/tuiles.c || cmake_object_order_depends_target_TraitementImageBMP
+  DEP_FILE = CMakeFiles\TraitementImageBMP.dir\tuiles.c.obj.d
   FLAGS = -g -std=gnu99 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\JeuDeplacementVehicule.dir
-  OBJECT_FILE_DIR = CMakeFiles\JeuDeplacementVehicule.dir
+  OBJECT_DIR = CMakeFiles\TraitementImageBMP.dir
+  OBJECT_FILE_DIR = CMakeFiles\TraitementImageBMP.dir
 
-build CMakeFiles/JeuDeplacementVehicule.dir/qdbmp.c.obj: C_COMPILER__JeuDeplacementVehicule_unscanned_Debug C$:/Users/souad/Desktop/2025H_INF155_03_TP2_Equipe02/2025H_INF155_03_TP2_Equipe02/qdbmp.c || cmake_object_order_depends_target_JeuDeplacementVehicule
-  DEP_FILE = CMakeFiles\JeuDeplacementVehicule.dir\qdbmp.c.obj.d
+build CMakeFiles/TraitementImageBMP.dir/qdbmp.c.obj: C_COMPILER__TraitementImageBMP_unscanned_Debug C$:/Users/souad/Desktop/2025H_INF155_03_TP2_Equipe02/2025H_INF155_03_TP2_Equipe02/qdbmp.c || cmake_object_order_depends_target_TraitementImageBMP
+  DEP_FILE = CMakeFiles\TraitementImageBMP.dir\qdbmp.c.obj.d
   FLAGS = -g -std=gnu99 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\JeuDeplacementVehicule.dir
-  OBJECT_FILE_DIR = CMakeFiles\JeuDeplacementVehicule.dir
+  OBJECT_DIR = CMakeFiles\TraitementImageBMP.dir
+  OBJECT_FILE_DIR = CMakeFiles\TraitementImageBMP.dir
 
-build CMakeFiles/JeuDeplacementVehicule.dir/exemple_qdbmp.c.obj: C_COMPILER__JeuDeplacementVehicule_unscanned_Debug C$:/Users/souad/Desktop/2025H_INF155_03_TP2_Equipe02/2025H_INF155_03_TP2_Equipe02/exemple_qdbmp.c || cmake_object_order_depends_target_JeuDeplacementVehicule
-  DEP_FILE = CMakeFiles\JeuDeplacementVehicule.dir\exemple_qdbmp.c.obj.d
+build CMakeFiles/TraitementImageBMP.dir/exemple_qdbmp.c.obj: C_COMPILER__TraitementImageBMP_unscanned_Debug C$:/Users/souad/Desktop/2025H_INF155_03_TP2_Equipe02/2025H_INF155_03_TP2_Equipe02/exemple_qdbmp.c || cmake_object_order_depends_target_TraitementImageBMP
+  DEP_FILE = CMakeFiles\TraitementImageBMP.dir\exemple_qdbmp.c.obj.d
   FLAGS = -g -std=gnu99 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\JeuDeplacementVehicule.dir
-  OBJECT_FILE_DIR = CMakeFiles\JeuDeplacementVehicule.dir
+  OBJECT_DIR = CMakeFiles\TraitementImageBMP.dir
+  OBJECT_FILE_DIR = CMakeFiles\TraitementImageBMP.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target JeuDeplacementVehicule
+# Link build statements for EXECUTABLE target TraitementImageBMP
 
 
 #############################################
-# Link the executable JeuDeplacementVehicule.exe
+# Link the executable TraitementImageBMP.exe
 
-build JeuDeplacementVehicule.exe: C_EXECUTABLE_LINKER__JeuDeplacementVehicule_Debug CMakeFiles/JeuDeplacementVehicule.dir/tuiles.c.obj CMakeFiles/JeuDeplacementVehicule.dir/qdbmp.c.obj CMakeFiles/JeuDeplacementVehicule.dir/exemple_qdbmp.c.obj
+build TraitementImageBMP.exe: C_EXECUTABLE_LINKER__TraitementImageBMP_Debug CMakeFiles/TraitementImageBMP.dir/tuiles.c.obj CMakeFiles/TraitementImageBMP.dir/qdbmp.c.obj CMakeFiles/TraitementImageBMP.dir/exemple_qdbmp.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\JeuDeplacementVehicule.dir
+  OBJECT_DIR = CMakeFiles\TraitementImageBMP.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = JeuDeplacementVehicule.exe
-  TARGET_IMPLIB = libJeuDeplacementVehicule.dll.a
-  TARGET_PDB = JeuDeplacementVehicule.exe.dbg
+  TARGET_FILE = TraitementImageBMP.exe
+  TARGET_IMPLIB = libTraitementImageBMP.dll.a
+  TARGET_PDB = TraitementImageBMP.exe.dbg
 
 
 #############################################
@@ -111,7 +111,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build JeuDeplacementVehicule: phony JeuDeplacementVehicule.exe
+build TraitementImageBMP: phony TraitementImageBMP.exe
 
 # =============================================================================
 # Folder targets.
@@ -121,7 +121,7 @@ build JeuDeplacementVehicule: phony JeuDeplacementVehicule.exe
 #############################################
 # Folder: C:/Users/souad/Desktop/2025H_INF155_03_TP2_Equipe02/2025H_INF155_03_TP2_Equipe02/cmake-build-debug
 
-build all: phony JeuDeplacementVehicule.exe
+build all: phony TraitementImageBMP.exe
 
 # =============================================================================
 # Built-in targets

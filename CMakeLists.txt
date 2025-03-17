@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(JeuDeplacementVehicule)
+project(TraitementImageBMP)
 
 set(CMAKE_C_STANDARD 99)
 
@@ -13,4 +13,4 @@ set(SOURCE_FILES
 )
 
 # Ajouter l'exécutable
-add_executable(JeuDeplacementVehicule ${SOURCE_FILES})
+add_executable(TraitementImageBMP ${SOURCE_FILES})
