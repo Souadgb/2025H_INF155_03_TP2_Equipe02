@@ -12,3 +12,6 @@
 43	170	7639420019306220	CMakeFiles/TraitementImageBMP.dir/exemple_qdbmp.c.obj	b3a960908030a969
 33	192	7639420019213219	CMakeFiles/TraitementImageBMP.dir/qdbmp.c.obj	682251e9db97dfef
 192	338	7639420020806423	TraitementImageBMP.exe	dc2f191a70973c2d
+161	570	7640306178095298	CMakeFiles/TraitementImageBMP.dir/tuiles.c.obj	968db3d8a7d4a20
+66	232	7640306457179467	CMakeFiles/TraitementImageBMP.dir/tuiles.c.obj	968db3d8a7d4a20
+233	444	7640306458846252	TraitementImageBMP.exe	dc2f191a70973c2d

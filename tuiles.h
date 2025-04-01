@@ -90,6 +90,22 @@ typedef struct {
 // LES DÉCLARATIONS DES 7 FONCTIONS DE CALCULS DE LA PARTIE 1
 //**************************************************************
 
+int get_nb_tuiles(BMP *original, int nbcol_tuile, int nblig_tuile);
+
+void init_tuile(int nbcol_tuile, int nblig_tuile, t_tuile * tuile);
+
+int get_pos_kieme_tuile(BMP *original, int k, t_tuile * tuile);
+
+double calcul_integrale_seuil_lumin(t_spectre_gris * ptr_sp, double seuil);
+
+t_spectre_gris * creer_spectre_tuile(BMP *original, const t_tuile * tuile);
+
+BMP * get_bitmap_tuile(BMP *original, const t_tuile * tuile);
+
+BMP * get_bitmap_gris_tuile(BMP *original, const t_tuile * tuile, double seuil_lum);
+
+
+
 
 
 
