@@ -1,17 +1,2 @@
 # ninja log v6
-25	140	7639389357002057	CMakeFiles/2025H_INF155_03_TP2_Equipe02.dir/exemple_qdbmp.c.obj	66b0980172eb2f73
-19	152	7639389356941347	CMakeFiles/2025H_INF155_03_TP2_Equipe02.dir/qdbmp.c.obj	9ad30a30f23e3a00
-152	307	7639389358265660	2025H_INF155_03_TP2_Equipe02.exe	819c394e0b78bff1
-7	90	7639389356821206	CMakeFiles/2025H_INF155_03_TP2_Equipe02.dir/tuiles.c.obj	dc21bccea4905e78
-205	351	7639414225507354	JeuDeplacementVehicule.exe	9609f6c144c95227
-2	446	7639419967286454	build.ninja	b8745d528ac2bee
-3	110	7639414223487842	CMakeFiles/JeuDeplacementVehicule.dir/tuiles.c.obj	7a0a933266a4d293
-12	205	7639414223579684	CMakeFiles/JeuDeplacementVehicule.dir/qdbmp.c.obj	e2aef80086f4c6de
-20	183	7639414223663019	CMakeFiles/JeuDeplacementVehicule.dir/exemple_qdbmp.c.obj	96e9631927bf3517
-19	124	7639420019068766	CMakeFiles/TraitementImageBMP.dir/tuiles.c.obj	968db3d8a7d4a20
-43	170	7639420019306220	CMakeFiles/TraitementImageBMP.dir/exemple_qdbmp.c.obj	b3a960908030a969
-33	192	7639420019213219	CMakeFiles/TraitementImageBMP.dir/qdbmp.c.obj	682251e9db97dfef
-192	338	7639420020806423	TraitementImageBMP.exe	dc2f191a70973c2d
-161	570	7640306178095298	CMakeFiles/TraitementImageBMP.dir/tuiles.c.obj	968db3d8a7d4a20
-66	232	7640306457179467	CMakeFiles/TraitementImageBMP.dir/tuiles.c.obj	968db3d8a7d4a20
-233	444	7640306458846252	TraitementImageBMP.exe	dc2f191a70973c2d
+2	446	1743778172694183744	build.ninja	b8745d528ac2bee
