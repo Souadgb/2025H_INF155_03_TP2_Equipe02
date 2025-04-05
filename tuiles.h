@@ -90,22 +90,49 @@ typedef struct {
 // LES DÉCLARATIONS DES 7 FONCTIONS DE CALCULS DE LA PARTIE 1
 //**************************************************************
 
+// Calcul du nombre de tuiles possibles dans l'image
 int get_nb_tuiles(BMP *original, int nbcol_tuile, int nblig_tuile);
 
-void init_tuile(int nbcol_tuile, int nblig_tuile, t_tuile * tuile);
+// Initialisation d'une tuile avec sa taille
+void init_tuile(int nbcol_tuile, int nblig_tuile, t_tuile *tuile);
 
-int get_pos_kieme_tuile(BMP *original, int k, t_tuile * tuile);
+// Positionnement d'une tuile spécifique dans l'image
+int get_pos_kieme_tuile(BMP *original, int k, t_tuile *tuile);
 
-double calcul_integrale_seuil_lumin(t_spectre_gris * ptr_sp, double seuil);
+// Calcul de l'intégrale de luminosité avec seuil
+double calcul_integrale_seuil_lumin(t_spectre_gris *ptr_sp, double seuil);
 
-t_spectre_gris * creer_spectre_tuile(BMP *original, const t_tuile * tuile);
+// Création d'un spectre de luminosité pour une tuile
+t_spectre_gris *creer_spectre_tuile(BMP *original, const t_tuile *tuile);
 
-BMP * get_bitmap_tuile(BMP *original, const t_tuile * tuile);
+// Extraction d'une tuile sous forme de nouvelle image BMP
+BMP *get_bitmap_tuile(BMP *original, const t_tuile *tuile);
 
-BMP * get_bitmap_gris_tuile(BMP *original, const t_tuile * tuile, double seuil_lum);
+// Extraction d'une tuile en niveaux de gris avec seuil
+BMP *get_bitmap_gris_tuile(BMP *original, const t_tuile *tuile, double seuil_lum);
 
+/* ===== Fonctions informatrices ===== */
 
+// Obtention de l'identifiant d'une tuile
+int get_id_tuile(const t_tuile *tu);
 
+// Obtention des décalages d'une tuile
+void get_offsets_tuile(const t_tuile *tu, int *offset_x, int *offset_y);
+
+// Obtention de l'intégrale sans seuil
+double get_integrale_seuil0(const t_spectre_gris *ptr_sp);
+
+// Obtention du seuil utilisé
+double get_seuil_variant(const t_spectre_gris *ptr_sp);
+
+// Obtention de l'intégrale avec seuil
+double get_integrale_seuil_variant(const t_spectre_gris *ptr_sp);
+
+// Obtention de la tuile associée à un spectre
+void get_tuile(const t_spectre_gris *ptr_sp, t_tuile *tuile);
+
+// Affichage du spectre (pour débogage)
+void afficher_spectre(const t_spectre_gris *ptr_sp);
 
 
 
