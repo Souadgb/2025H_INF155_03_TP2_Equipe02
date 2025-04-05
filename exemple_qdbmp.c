@@ -22,120 +22,62 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<assert.h>
+#include "tuiles.h"
 
 #include "qdbmp.h"    //le module de traitement de Bitmaps
 
-#define SEUIL_ROUGE 0.8    //seuil de 80%
+#define SEUIL_ROUGE 0.8    //seuil de 8
+int main() {
+	BMP *image = BMP_ReadFile("Images/image_test.bmp");
 
-int main(void) {
+	if (BMP_GetError() != BMP_OK) {
+		printf("Erreur QDBMP: %s\n", BMP_GetErrorDescription());
+		return 1;
+	}
 
-	// pour conserver les valeurs RGB d'un pixel
-	UCHAR red, green, blue;
+	if (image == NULL) {
+		printf("Erreur: Impossible de lire l'image.\n");
+		return 1;
+	}
 
-	// image originale et ses valeurs
-	char nom_image[80];
-	BMP * original ;
-	int nb_col, nb_lig, codage;
+	int tailles[][2] = {{64, 64}, {128, 128}, {256, 256}};
+	int i;
 
-	// la nouvelle image extraite de l'originale et ses valeurs de taille et d'offsets
-	BMP * nouv_image;
-	int col_depart, lig_depart, colonnes, lignes;
+	for (i = 0; i < 3; ++i) {
+		int nb_col = tailles[i][0];
+		int nb_lig = tailles[i][1];
 
-	// les itarateurs matriciels des pixels de l'image
-	int  pos_x, pos_y;
+		int nb_tuiles = get_nb_tuiles(image, nb_col, nb_lig);
+		printf("Taille de tuile %dx%d: %d tuiles possibles.\n", nb_col, nb_lig, nb_tuiles);
 
-	// demander le nom du fichier bitmap
-	printf("Quel est le nom du fichier Bitmap? ");
-	scanf("%s", nom_image);
+		int k = nb_tuiles / 2; // tuile au milieu
 
-	// ouvrir le fichier original et obtenir ses caract�ristiques principales
-	original = BMP_ReadFile(nom_image);
-	assert(original);                    //arr�t du programme si == NULL
+		t_tuile tuile;
+		init_tuile(nb_col, nb_lig, &tuile);
+		get_pos_kieme_tuile(image, k, &tuile);
 
-	nb_lig = BMP_GetHeight(original);
-	nb_col = BMP_GetWidth(original);
-	codage = BMP_GetDepth(original);     //nombre de bits par pixel
+		t_spectre_gris *spectre = creer_spectre_tuile(image, &tuile);
+		if (spectre != NULL) {
+			printf("Spectre de la tuile #%d cree.\n", k);
+			printf("Integrale seuil 0.0 = %.3f\n", get_integrale_seuil0(spectre));
+			BMP *tuile_couleur = get_bitmap_tuile(image, &tuile);
+			BMP *tuile_gris = get_bitmap_gris_tuile(image, &tuile, 0.0);
 
-	// PREMIERE EXTRACTION (en vert uniquement)
+			char nom_couleur[64], nom_gris[64];
+			sprintf(nom_couleur, "Tuile_%d_%d.bmp", nb_col, nb_lig);
+			sprintf(nom_gris, "TuileGris_%d_%d.bmp", nb_col, nb_lig);
 
-	// les tailles de la sous-image vont d�pendre de celles de l'original
-	// on veut copier le QUART de l'image originale
-	lig_depart = nb_lig / 4;
-	lignes = nb_lig / 2;
-	col_depart = nb_col / 4;
-	colonnes = nb_col / 2;
-	nouv_image = BMP_Create(colonnes, lignes, codage);
+			BMP_WriteFile(tuile_couleur, nom_couleur);
+			BMP_WriteFile(tuile_gris, nom_gris);
 
-	// extraire le quart de l'image originale et le copier tel quel
-	for (pos_x = 0; pos_x < colonnes; ++pos_x) {
-		for (pos_y = 0; pos_y < lignes; ++pos_y) {
-			// obtenir les couleurs du pixel � la position d�cal�e
-			BMP_GetPixelRGB(original, col_depart + pos_x, lig_depart + pos_y,
-				            &red, &green, &blue);
+			printf("Images sauvegardees: %s et %s\n", nom_couleur, nom_gris);
 
-			// �crire ce pixel dans la nouvelle image (� partir de [0, 0])
-			BMP_SetPixelRGB(nouv_image, pos_x, pos_y, red, green, blue);
+			BMP_Free(tuile_couleur);
+			BMP_Free(tuile_gris);
+			free(spectre);
 		}
 	}
 
-	// sauvegarder l'image et lib�rer ensuite l'espace occup� par le BMP
-	BMP_WriteFile(nouv_image, "nouvelle00.bmp");
-	BMP_Free(nouv_image);
-
-	// SECONDE EXTRACTION EN VERT
-
-	// les tailles de la sous-image vont d�pendre de celles de l'original
-	// on veut extraire la moiti� de GAUCHE de l'image
-	lignes = nb_lig;
-	colonnes = nb_col / 2;
-	nouv_image = BMP_Create(colonnes, lignes, codage);
-
-	// extraire la demie gauche de l'image originale et le copier en teinte verte unique
-	for (pos_x = 0; pos_x < colonnes; ++pos_x) {
-		for (pos_y = 0; pos_y < lignes; ++pos_y) {
-			// obtenir les couleurs du pixel � la position [pos_y, pos_x]
-			BMP_GetPixelRGB(original, pos_x, pos_y, &red, &green, &blue);
-
-			// on copie que la valeur du VERT (autres couleurs = 0)
-			BMP_SetPixelRGB(nouv_image, pos_x, pos_y, 0, green, 0);
-		}
-	}
-
-	// sauvegarder l'image et lib�rer ensuite l'espace occup� par le BMP
-	BMP_WriteFile(nouv_image, "nouvelle01.bmp");
-	BMP_Free(nouv_image);
-
-	// LA TROISIEME IMAGE EXTRAITE VA SEUILLER LE ROUGE
-	// seul un rouge fonc� � 80% et plus est conserv� aux pixels
-
-	// les tailles de la sous-image vont d�pendre de celles de l'original (M�ME taille)
-	lignes = nb_lig;
-	colonnes = nb_col;
-	nouv_image = BMP_Create(colonnes, lignes, codage);
-
-	// extraire l'image originale et le copier en seuillant le rouge de chaque pixel
-	for (pos_x = 0; pos_x < colonnes; ++pos_x) {
-		for (pos_y = 0; pos_y < lignes; ++pos_y) {
-			// obtenir les couleurs du pixel � la position [pos_y, pos_x]
-			BMP_GetPixelRGB(original, pos_x, pos_y, &red, &green, &blue);
-
-			// d�terminer si la valeur de rouge est suffisante (80% de 255 et plus)
-			red = (red / 255.0) < SEUIL_ROUGE ? 0 : red;
-
-			// on copie la valeur du ROUGE ou 0 si en bas du seuil (autres couleurs tel quel)
-			BMP_SetPixelRGB(nouv_image, pos_x, pos_y, red, green, blue);
-		}
-	}
-
-	// sauvegarder l'image et lib�rer ensuite l'espace occup� par le BMP
-	BMP_WriteFile(nouv_image, "nouvelle02.bmp");
-	BMP_Free(nouv_image);
-
-	// le free fonctionnel du BMP original
-	BMP_Free(original);
-
-	// c'est fini
-	printf("3 nouvelles images ont ete copiees dans le repertoire de travail..\n");
-	system("pause");
+	BMP_Free(image);
 	return 0;
 }

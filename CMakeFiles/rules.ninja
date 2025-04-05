@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /usr/local/Cellar/cmake/3.30.3/bin/cmake --regenerate-during-build -S/Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02 -B/Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02/cmake-build-debug
+  command = /usr/local/Cellar/cmake/3.30.3/bin/cmake --regenerate-during-build -S/Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02 -B/Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02
   description = Re-running CMake...
   generator = 1
 

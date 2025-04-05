@@ -1,4 +1,4 @@
-/usr/local/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/x64/ninja -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ -G Ninja -S /Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02 -B /Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02/cmake-build-debug
+/usr/local/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/x64/ninja -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ -G Ninja -S /Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02 -B /Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02
 -- The C compiler identification is AppleClang 16.0.0.16000026
 -- The CXX compiler identification is AppleClang 16.0.0.16000026
 -- Detecting C compiler ABI info
@@ -11,6 +11,6 @@
 -- Check for working CXX compiler: /usr/bin/g++ - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Configuring done (3.8s)
+-- Configuring done (5.5s)
 -- Generating done (0.1s)
--- Build files have been written to: /Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02/cmake-build-debug
+-- Build files have been written to: /Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02
