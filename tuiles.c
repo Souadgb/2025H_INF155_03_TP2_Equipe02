@@ -174,7 +174,7 @@ void get_tuile(const t_spectre_gris *ptr_sp, t_tuile *tuile) {
 void afficher_spectre(const t_spectre_gris *ptr_sp) {
     if(!ptr_sp) return;
 
-    printf("Spectre de la tuile: %d\n", ptr_sp->tuile.id_enum);
+    printf("Spectre de la tuile %d\n", ptr_sp->tuile.id_enum);
     printf("Integrale complete: %.2f\n", ptr_sp->integrale_lumin_compl);
     if(ptr_sp->seuil_lumin > 0.0) {
         printf("Integrale avec seuil %.2f: %.2f\n",
