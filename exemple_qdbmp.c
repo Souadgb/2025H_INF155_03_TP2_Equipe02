@@ -15,11 +15,11 @@ int main(void) {
     // image originale et ses valeurs
     char nom_image[80];
     BMP *original;
-    int nb_col, nb_lig, codage;
+    int nb_col, nb_lig, codage; //nombre de bits par pixel
 
 // la nouvelle image extraite de l'originale et ses valeurs de taille et d'offsets    BMP *nouv_image;
     BMP * nouv_image;
-    int col_depart, lig_depart, colonnes, lignes;
+    int col_depart, lig_depart, colonnes, lignes; // colonne ligne dimension sous image
 
     // les itarateurs matriciels des pixels de l'image
     int pos_x, pos_y;
@@ -29,15 +29,15 @@ int main(void) {
     scanf("%s", nom_image);
 
     // ouvrir le fichier original et obtenir ses caract�ristiques principales
-    original = BMP_ReadFile(nom_image);
+    original = BMP_ReadFile(nom_image);  //charge l'image "non_image" et original pointe la
     if (!original) {
-        printf("Erreur: Impossible de lire l'image.\n");
+        printf("Erreur: Impossible de lire l'image.\n"); //si trouve pas image
         return 1;
     }
 
-    nb_lig = BMP_GetHeight(original);
-    nb_col = BMP_GetWidth(original);
-    codage = BMP_GetDepth(original);
+    nb_lig = BMP_GetHeight(original); //recupere hauteur image original
+    nb_col = BMP_GetWidth(original); //recupere colonne image original
+    codage = BMP_GetDepth(original); //nombre de bit par pixel
 
     // PREMIERE EXTRACTION (en vert uniquement)
 
@@ -48,26 +48,34 @@ int main(void) {
     colonnes = nb_col / 2;
     nouv_image = BMP_Create(colonnes, lignes, codage);
 
+    //boucle qui parcours les pixels
     for (pos_x = 0; pos_x < colonnes; ++pos_x) {
         for (pos_y = 0; pos_y < lignes; ++pos_y) {
             BMP_GetPixelRGB(original, col_depart + pos_x, lig_depart + pos_y, &red, &green, &blue);
             BMP_SetPixelRGB(nouv_image, pos_x, pos_y, red, green, blue);
         }
     }
-    BMP_WriteFile(nouv_image, "nouvelle00.bmp");
+    BMP_WriteFile(nouv_image, "nouvelle00.bmp"); //sauvegarde de la nouvelle image
     BMP_Free(nouv_image);
 
     // DEUXIÈME IMAGE : moité gauche en vert
     lignes = nb_lig;
     colonnes = nb_col / 2;
     nouv_image = BMP_Create(colonnes, lignes, codage);
+
 // extraire la demie gauche de l'image originale et le copier en teinte verte unique
+    for (pos_x = 0; pos_x < colonnes; ++pos_x) {
         for (pos_y = 0; pos_y < lignes; ++pos_y) {
             // obtenir les couleurs du pixel � la position [pos_y, pos_x]
             BMP_GetPixelRGB(original, pos_x, pos_y, &red, &green, &blue);
-            // on copie que la valeur du VERT (autres couleurs = 0)
-            BMP_SetPixelRGB(nouv_image, pos_x, pos_y, 0, green, 0);
+
+            // d�terminer si la valeur de rouge est suffisante (80% de 255 et plus)
+            red = (red / 255.0) < SEUIL_ROUGE ? 0 : red;
+
+            // on copie la valeur du ROUGE ou 0 si en bas du seuil (autres couleurs tel quel)
+            BMP_SetPixelRGB(nouv_image, pos_x, pos_y, red, green, blue);
         }
+    }
 
 // sauvegarder l'image et lib�rer ensuite l'espace occup� par le BMP
 BMP_WriteFile(nouv_image,"nouvelle01.bmp");
