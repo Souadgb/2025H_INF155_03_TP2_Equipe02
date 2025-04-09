@@ -1,4 +1,4 @@
 /usr/local/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/x64/ninja -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ -G Ninja -S /Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02 -B /Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02
--- Configuring done (0.1s)
--- Generating done (0.0s)
+-- Configuring done (0.8s)
+-- Generating done (0.1s)
 -- Build files have been written to: /Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02

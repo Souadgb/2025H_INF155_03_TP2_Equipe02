@@ -27,7 +27,7 @@
 
 #define SEUIL_ROUGE 0.8    //seuil de 80%
 
-int main(void) {
+int exemple_qdbmp(void) {
 
 	// pour conserver les valeurs RGB d'un pixel
 	UCHAR red, green, blue;
@@ -50,7 +50,7 @@ int main(void) {
 
 	// ouvrir le fichier original et obtenir ses caract�ristiques principales
 	original = BMP_ReadFile(nom_image);
-	assert(original);
+	assert(original);                    //arr�t du programme si == NULL
 
 	nb_lig = BMP_GetHeight(original);
 	nb_col = BMP_GetWidth(original);
@@ -66,22 +66,26 @@ int main(void) {
 	colonnes = nb_col / 2;
 	nouv_image = BMP_Create(colonnes, lignes, codage);
 
-
+	// extraire le quart de l'image originale et le copier tel quel
 	for (pos_x = 0; pos_x < colonnes; ++pos_x) {
 		for (pos_y = 0; pos_y < lignes; ++pos_y) {
-
+			// obtenir les couleurs du pixel � la position d�cal�e
 			BMP_GetPixelRGB(original, col_depart + pos_x, lig_depart + pos_y,
 				            &red, &green, &blue);
 
-
+			// �crire ce pixel dans la nouvelle image (� partir de [0, 0])
 			BMP_SetPixelRGB(nouv_image, pos_x, pos_y, red, green, blue);
 		}
 	}
 
+	// sauvegarder l'image et lib�rer ensuite l'espace occup� par le BMP
 	BMP_WriteFile(nouv_image, "nouvelle00.bmp");
 	BMP_Free(nouv_image);
 
-	  // DEUXIÈME IMAGE : moité gauche en vert
+	// SECONDE EXTRACTION EN VERT
+
+	// les tailles de la sous-image vont d�pendre de celles de l'original
+	// on veut extraire la moiti� de GAUCHE de l'image
 	lignes = nb_lig;
 	colonnes = nb_col / 2;
 	nouv_image = BMP_Create(colonnes, lignes, codage);
@@ -129,7 +133,6 @@ int main(void) {
 
 	// le free fonctionnel du BMP original
 	BMP_Free(original);
-
 
 	// c'est fini
 	printf("3 nouvelles images ont ete copiees dans le repertoire de travail..\n");

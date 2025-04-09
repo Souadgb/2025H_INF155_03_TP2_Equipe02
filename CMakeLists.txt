@@ -10,6 +10,7 @@ set(SOURCE_FILES
         qdbmp.c
         qdbmp.h
         exemple_qdbmp.c
+        main.c
 )
 
 # Ajouter l'exécutable

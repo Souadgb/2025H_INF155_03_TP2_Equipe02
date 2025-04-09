@@ -67,6 +67,12 @@ build CMakeFiles/TraitementImageBMP.dir/exemple_qdbmp.c.o: C_COMPILER__Traitemen
   OBJECT_DIR = CMakeFiles/TraitementImageBMP.dir
   OBJECT_FILE_DIR = CMakeFiles/TraitementImageBMP.dir
 
+build CMakeFiles/TraitementImageBMP.dir/main.c.o: C_COMPILER__TraitementImageBMP_unscanned_Debug /Users/cherifamihoub/Documents/GitHub/2025H_INF155_03_TP2_Equipe02/main.c || cmake_object_order_depends_target_TraitementImageBMP
+  DEP_FILE = CMakeFiles/TraitementImageBMP.dir/main.c.o.d
+  FLAGS = -g -std=gnu99 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/TraitementImageBMP.dir
+  OBJECT_FILE_DIR = CMakeFiles/TraitementImageBMP.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target TraitementImageBMP
@@ -75,7 +81,7 @@ build CMakeFiles/TraitementImageBMP.dir/exemple_qdbmp.c.o: C_COMPILER__Traitemen
 #############################################
 # Link the executable TraitementImageBMP
 
-build TraitementImageBMP: C_EXECUTABLE_LINKER__TraitementImageBMP_Debug CMakeFiles/TraitementImageBMP.dir/tuiles.c.o CMakeFiles/TraitementImageBMP.dir/qdbmp.c.o CMakeFiles/TraitementImageBMP.dir/exemple_qdbmp.c.o
+build TraitementImageBMP: C_EXECUTABLE_LINKER__TraitementImageBMP_Debug CMakeFiles/TraitementImageBMP.dir/tuiles.c.o CMakeFiles/TraitementImageBMP.dir/qdbmp.c.o CMakeFiles/TraitementImageBMP.dir/exemple_qdbmp.c.o CMakeFiles/TraitementImageBMP.dir/main.c.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.0.sdk
   OBJECT_DIR = CMakeFiles/TraitementImageBMP.dir
   POST_BUILD = :
