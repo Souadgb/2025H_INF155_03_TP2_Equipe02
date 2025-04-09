@@ -7,6 +7,26 @@
 #include "qdbmp.h"
 #include "tuiles.h"
 
+void afficher_spectre_detail(const t_spectre_gris *ptr_sp) {
+    if (!ptr_sp) return;
+    printf("Spectre de la tuile\n");
+    printf("  Integrale lumineuse complete    : %.2f [unites pixel * intensite]\n", ptr_sp->integrale_lumin_compl);
+    printf("  Integrale lumineuse (Seuil %.2f) : %.2f [unites pixel * intensite]\n ", ptr_sp->seuil_lumin,ptr_sp->integrale_lumin_seuil);
+
+    printf("  Frequences non-nulles :\n");
+    for (int i = 0; i < NB_FREQUENCES; ++i) {
+        unsigned int count = ptr_sp->spectre[i];
+        if (count > 0) {
+            printf("    Niveau %3d : ", i);
+            for (unsigned int k = 0; k < count; ++k) {
+                putchar('*');
+            }
+            printf(" pixel\n");
+        }
+    }
+}
+
+
 int main() {
     /*===========================
        OUVERTURE DE L'IMAGE
@@ -62,9 +82,9 @@ int main() {
         printf("Nombre total de tuiles : %d\n", total);
         printf("Tuile selectionnee : #%d\n\n", k);
 
-        printf("Analyse spectre :\n");
-        printf("  - Integrale lumineuse complete       : %.4f [unites pixel * intensite]\n", integ_complet);
-        printf("  - Integrale lumineuse (seuil 0.5)    : %.4f [unites pixel * intensite]\n", integ_seuil05);
+
+
+        afficher_spectre_detail(spectre);
 
         /*===========================
         CRÉATION DES DEUX BITMAPS (COULEUR + GRIS)
