@@ -9,22 +9,39 @@
 
 void afficher_spectre_detail(const t_spectre_gris *ptr_sp) {
     if (!ptr_sp) return;
+
     printf("Spectre de la tuile\n");
     printf("  Integrale lumineuse complete    : %.2f [unites pixel * intensite]\n", ptr_sp->integrale_lumin_compl);
-    printf("  Integrale lumineuse (Seuil %.2f) : %.2f [unites pixel * intensite]\n ", ptr_sp->seuil_lumin,ptr_sp->integrale_lumin_seuil);
+    printf("  Integrale lumineuse (Seuil %.2f) : %.2f [unites pixel * intensite]\n ", ptr_sp->seuil_lumin, ptr_sp->integrale_lumin_seuil);
 
-    printf("  Frequences non-nulles :\n");
+    printf(" Frequences non-nulles (affichage proportionnel a 20 etoiles max) :\n");
+
+    // Étape 1 : trouver la valeur max du spectre
+    unsigned int max = 0;
+    for (int i = 0; i < NB_FREQUENCES; ++i) {
+        if (ptr_sp->spectre[i] > max) {
+            max = ptr_sp->spectre[i];
+        }
+    }
+
+    // Éviter division par zéro
+    if (max == 0) return;
+
+    // Étape 2 : affichage proportionnel avec 20 étoiles
     for (int i = 0; i < NB_FREQUENCES; ++i) {
         unsigned int count = ptr_sp->spectre[i];
         if (count > 0) {
             printf("    Niveau %3d : ", i);
-            for (unsigned int k = 0; k < count; ++k) {
+            // Calculer le nombre d'étoiles proportionnel (arrondi)
+            int nb_etoiles = (int)((((float)count / max) * 20) + 0.5);
+            for (int k = 0; k < nb_etoiles; ++k) {
                 putchar('*');
             }
-            printf(" pixel\n");
+            printf(" (%u pixels)\n", count);
         }
     }
 }
+
 
 
 int main() {
@@ -36,7 +53,7 @@ int main() {
         printf("Erreur d'ouverture : %s\n", BMP_GetErrorDescription());
         return 1;
     }
-    printf("l'Image lue avec succès!\n\n");
+    printf("L'image est lue avec succes!\n\n");
 
     /*===========================
     DÉFINITION DES TAILLES DE TUILES
@@ -49,9 +66,9 @@ int main() {
 
     srand(time(NULL));
 
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; ++i) { //Pour chaque taille de tuile
         int nb_col = tailles_tuiles[i][0];
-        int nb_lig = tailles_tuiles[i][1];
+        int nb_lig = tailles_tuiles[i][1]; //largeur et hauteur de la tuile
 
         /*===========================
         CALCUL DU NOMBRE DE TUILES
@@ -78,7 +95,7 @@ int main() {
         double integ_complet = get_integrale_seuil0(spectre); //somme toutes les intensités
         double integ_seuil05 = calcul_integrale_seuil_lumin(spectre, 0.5); //les pixels dont la luminosité est ≥ 0.5
 
-        printf("Tuile %d Taille : %d x %d\n", i + 1, nb_col, nb_lig);
+        printf("Tuile %d \nTaille : %d x %d\n", i + 1, nb_col, nb_lig);
         printf("Nombre total de tuiles : %d\n", total);
         printf("Tuile selectionnee : #%d\n\n", k);
 
@@ -102,15 +119,15 @@ int main() {
         BMP_WriteFile(bmp_couleur, nom1);
         BMP_WriteFile(bmp_gris, nom2);
 
-        printf("\nImages sauvegardées : %s (couleur), %s (gris)\n\n", nom1, nom2);
+        printf("\nImages sauvegardees : %s (couleur), %s (gris)\n\n", nom1, nom2);
 
-        // Libération mémoire
+        // Libération de la mémoire
         BMP_Free(bmp_couleur);
         BMP_Free(bmp_gris);
         free(spectre);
     }
 
     BMP_Free(original);
-    printf("\nToutes les tuiles ont ete traitées avec succés!\n");
+    printf("\nToutes les tuiles ont ete traitees avec succes!\n");
     return 0;
 }
