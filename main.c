@@ -9,7 +9,8 @@
 
 void afficher_spectre_detail(const t_spectre_gris *ptr_sp) {
     if (!ptr_sp) return;
-
+    // integrale lumineuse complete: chaque pixel * son intensité lumineuse
+    // seuil ignoré intensité trop faibles
     printf("Spectre de la tuile\n");
     printf("  Integrale lumineuse complete    : %.2f [unites pixel * intensite]\n", ptr_sp->integrale_lumin_compl);
     printf("  Integrale lumineuse (Seuil %.2f) : %.2f [unites pixel * intensite]\n ", ptr_sp->seuil_lumin, ptr_sp->integrale_lumin_seuil);

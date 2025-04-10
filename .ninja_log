@@ -1,20 +1,7 @@
 # ninja log v6
 493	683	1744230554704550211	TraitementImageBMP	3cc07ba8221582db
-49	451	7659359725955503	CMakeFiles/TraitementImageBMP.dir/exemple_qdbmp.c.obj	b3a960908030a969
-60	460	7659359726055472	CMakeFiles/TraitementImageBMP.dir/main.c.obj	520cfbc11370e6f2
-18	475	7659359725639673	CMakeFiles/TraitementImageBMP.dir/tuiles.c.obj	968db3d8a7d4a20
-37	490	7659359725824951	CMakeFiles/TraitementImageBMP.dir/qdbmp.c.obj	682251e9db97dfef
-491	871	7659359730362526	TraitementImageBMP.exe	ae01255327a24813
-14	206	7659361349321507	TraitementImageBMP.exe	ae01255327a24813
-17	194	7659390100046896	CMakeFiles/TraitementImageBMP.dir/main.c.obj	520cfbc11370e6f2
-197	443	7659390101837214	TraitementImageBMP.exe	ae01255327a24813
-15	211	7659404441284085	CMakeFiles/TraitementImageBMP.dir/main.c.obj	520cfbc11370e6f2
-213	441	7659404443258307	TraitementImageBMP.exe	ae01255327a24813
-15	194	7659405897736971	CMakeFiles/TraitementImageBMP.dir/main.c.obj	520cfbc11370e6f2
-196	405	7659405899544223	TraitementImageBMP.exe	ae01255327a24813
-22	266	7659420501738062	CMakeFiles/TraitementImageBMP.dir/main.c.obj	520cfbc11370e6f2
-267	531	7659420504186278	TraitementImageBMP.exe	ae01255327a24813
-16	184	7659422031058788	CMakeFiles/TraitementImageBMP.dir/main.c.obj	520cfbc11370e6f2
-186	389	7659422032753866	TraitementImageBMP.exe	ae01255327a24813
-15	188	7659422628809661	CMakeFiles/TraitementImageBMP.dir/main.c.obj	520cfbc11370e6f2
-190	404	7659422630554801	TraitementImageBMP.exe	ae01255327a24813
+6	434	1744302941061554297	CMakeFiles/TraitementImageBMP.dir/exemple_qdbmp.c.o	73ff22ec59b65b0d
+4	438	1744302941059168935	CMakeFiles/TraitementImageBMP.dir/tuiles.c.o	5c36e9b7c1ebc048
+5	446	1744302941059921607	CMakeFiles/TraitementImageBMP.dir/qdbmp.c.o	52708e269167d55f
+436	607	1744302941490800532	CMakeFiles/TraitementImageBMP.dir/main.c.o	f04a8b1659b62a1c
+608	768	1744302941662534357	TraitementImageBMP	3cc07ba8221582db
