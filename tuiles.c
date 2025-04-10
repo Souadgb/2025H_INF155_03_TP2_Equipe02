@@ -30,7 +30,7 @@ void init_tuile(int nbcol_tuile, int nblig_tuile, t_tuile *tuile) {
     tuile->id_enum = -1;
 }
 
-//posiitonne tuile selon son indice k sur l'image
+//positionne tuile selon son indice k sur l'image
 int get_pos_kieme_tuile(BMP *original, int k, t_tuile *tuile) {
     if(original == NULL || tuile == NULL || k < 0) return 0;
 
