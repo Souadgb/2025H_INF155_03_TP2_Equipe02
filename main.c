@@ -16,7 +16,7 @@ void afficher_spectre_detail(const t_spectre_gris *ptr_sp) {
 
     printf(" Frequences non-nulles (affichage proportionnel a 20 etoiles max) :\n");
 
-    // Étape 1 : trouver la valeur max du spectre
+    // Étape 1 : trouver la valeur max du spectre pour l'echelle d'affichage des etoiles
     unsigned int max = 0;
     for (int i = 0; i < NB_FREQUENCES; ++i) {
         if (ptr_sp->spectre[i] > max) {
@@ -27,11 +27,11 @@ void afficher_spectre_detail(const t_spectre_gris *ptr_sp) {
     // Éviter division par zéro
     if (max == 0) return;
 
-    // Étape 2 : affichage proportionnel avec 20 étoiles
+    // Étape 2 : affichage proportionnel avec 20 étoiles du spectre de la tuile
     for (int i = 0; i < NB_FREQUENCES; ++i) {
         unsigned int count = ptr_sp->spectre[i];
         if (count > 0) {
-            printf("    Niveau %3d : ", i);
+            printf("           %3d : ", i);
             // Calculer le nombre d'étoiles proportionnel (arrondi)
             int nb_etoiles = (int)((((float)count / max) * 20) + 0.5);
             for (int k = 0; k < nb_etoiles; ++k) {
@@ -56,7 +56,7 @@ int main() {
     printf("L'image est lue avec succes!\n\n");
 
     /*===========================
-    DÉFINITION DES TAILLES DE TUILES
+    Définition des 3 tailles des tuiles.
     ===========================*/
     int tailles_tuiles[3][2] = {
         {64, 64},   // 50x50
@@ -66,14 +66,14 @@ int main() {
 
     srand(time(NULL));
 
-    for (int i = 0; i < 3; ++i) { //Pour chaque taille de tuile
+    for (int i = 0; i < 3; ++i) { //Pour chaque taille de tuile (3 fois)
         int nb_col = tailles_tuiles[i][0];
         int nb_lig = tailles_tuiles[i][1]; //largeur et hauteur de la tuile
 
         /*===========================
-        CALCUL DU NOMBRE DE TUILES
+        Calcul du nombre de tuiles
         ===========================*/
-        int total = get_nb_tuiles(original, nb_col, nb_lig); //calcul combien de tuiles dans image
+        int total = get_nb_tuiles(original, nb_col, nb_lig); //calcule combien de tuiles dans l'image
         int k = rand() % total; //selectionne tuile au hasard
         t_tuile tuile; //structure représente tuile
         init_tuile(nb_col, nb_lig, &tuile); //initialise tuile avec taille voulu
@@ -84,9 +84,9 @@ int main() {
         }
 
         /*===========================
-        CRÉATION DU SPECTRE ET AFFICHAGE DES INTÉGRALES
+        Creation du spectre et affichage des integrales.
         ===========================*/
-        t_spectre_gris* spectre = creer_spectre_tuile(original, &tuile); //converti pixel a valeur de gris
+        t_spectre_gris* spectre = creer_spectre_tuile(original, &tuile); //convertit pixel a valeur de gris
         if (spectre == NULL) {
             printf("Erreur lors de la creation du spectre.\n");
             continue;
@@ -99,18 +99,16 @@ int main() {
         printf("Nombre total de tuiles : %d\n", total);
         printf("Tuile selectionnee : #%d\n\n", k);
 
-
-
         afficher_spectre_detail(spectre);
 
         /*===========================
-        CRÉATION DES DEUX BITMAPS (COULEUR + GRIS)
+        Creation des deux bitmap pour la tuile (couleur & gris).
         ===========================*/
         BMP* bmp_couleur = get_bitmap_tuile(original, &tuile);
         BMP* bmp_gris = get_bitmap_gris_tuile(original, &tuile, 0.0);
 
         /*===========================
-         SAUVEGARDE DES IMAGES EN FICHIERS
+         Sauvegarde les bitmaps en fichiers.
         ===========================*/
         char nom1[100], nom2[100];
         sprintf(nom1, "Tuile%d.bmp", k);
