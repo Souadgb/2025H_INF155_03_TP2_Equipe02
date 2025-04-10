@@ -46,9 +46,9 @@ void afficher_spectre_detail(const t_spectre_gris *ptr_sp) {
 
 
 int main() {
-    /*===========================
-       OUVERTURE DE L'IMAGE
-    ===========================*/
+
+      // OUVERTURE DE L'IMAGE //
+
     BMP* original = BMP_ReadFile("Images/image_test.bmp");
     if (BMP_GetError() != BMP_OK || original == NULL) {
         printf("Erreur d'ouverture : %s\n", BMP_GetErrorDescription());
@@ -56,9 +56,8 @@ int main() {
     }
     printf("L'image est lue avec succes!\n\n");
 
-    /*===========================
-    DÉFINITION DES TAILLES DE TUILES
-    ===========================*/
+    //DÉFINITION DES TAILLES DE TUILES
+
     int tailles_tuiles[3][2] = {
         {64, 64},   // 50x50
         {125, 125},  // 100x80
@@ -71,9 +70,9 @@ int main() {
         int nb_col = tailles_tuiles[i][0];
         int nb_lig = tailles_tuiles[i][1]; //largeur et hauteur de la tuile
 
-        /*===========================
-        CALCUL DU NOMBRE DE TUILES
-        ===========================*/
+
+        //CALCUL DU NOMBRE DE TUILES//
+
         int total = get_nb_tuiles(original, nb_col, nb_lig); //calcul combien de tuiles dans image
         int k = rand() % total; //selectionne tuile au hasard
         t_tuile tuile; //structure représente tuile
@@ -84,9 +83,8 @@ int main() {
             continue;
         }
 
-        /*===========================
-        CRÉATION DU SPECTRE ET AFFICHAGE DES INTÉGRALES
-        ===========================*/
+        //CRÉATION DU SPECTRE ET AFFICHAGE DES INTÉGRALES
+
         t_spectre_gris* spectre = creer_spectre_tuile(original, &tuile); //converti pixel a valeur de gris
         if (spectre == NULL) {
             printf("Erreur lors de la creation du spectre.\n");
@@ -104,15 +102,15 @@ int main() {
 
         afficher_spectre_detail(spectre);
 
-        /*===========================
-        CRÉATION DES DEUX BITMAPS (COULEUR + GRIS)
-        ===========================*/
+
+        //CRÉATION DES DEUX BITMAPS (COULEUR + GRIS)//
+
         BMP* bmp_couleur = get_bitmap_tuile(original, &tuile);
         BMP* bmp_gris = get_bitmap_gris_tuile(original, &tuile, 0.0);
 
-        /*===========================
-         SAUVEGARDE DES IMAGES EN FICHIERS
-        ===========================*/
+
+        // SAUVEGARDE DES IMAGES EN FICHIERS//
+
         char nom1[100], nom2[100];
         sprintf(nom1, "Tuile%d.bmp", k);
         sprintf(nom2, "TuileGris%d.bmp", k);
