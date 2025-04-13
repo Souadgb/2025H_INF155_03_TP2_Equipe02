@@ -6,6 +6,7 @@
 #include <time.h>
 #include "qdbmp.h"
 #include "tuiles.h"
+#include "recouvrement.h"
 
 void afficher_spectre_detail(const t_spectre_gris *ptr_sp) {
     if (!ptr_sp) return;
@@ -126,7 +127,38 @@ int main() {
         free(spectre);
     }
 
+    // PARTIE 2 - RECOUVREMENT COMPLET
+    int nb_col = 64, nb_lig = 64;
+    double seuil_lum = 0.5, prop_garde = 0.2, prop_min = 0.3;
+
+    FILE* log_file = fopen("log_resultat.txt", "w");
+    if (!log_file) {
+        printf("Erreur : impossible d'ouvrir le fichier log.\n");
+        return 1;
+    }
+    fprintf(log_file, "%.1f %d %d %.1f %.1f\n", seuil_lum, nb_col, nb_lig, prop_garde, prop_min);
+
+    int nb_tuiles = get_nb_tuiles(original, nb_col, nb_lig);
+    t_recouvrement *rec = init_recouvrement(nb_tuiles, nb_col, nb_lig);
+
+    for (int k = 0; k < nb_tuiles; ++k) {
+        t_tuile tuile;
+        init_tuile(nb_col, nb_lig, &tuile);
+        if (get_pos_kieme_tuile(original, k, &tuile)) {
+            t_spectre_gris *sp = creer_spectre_tuile(original, &tuile);
+            ajouter_spectre_rec(sp, rec);
+        }
+    }
+
+    trier_spectres(rec, seuil_lum);
+    BMP *res = reconstruire_image(original, rec, prop_garde, prop_min, log_file);
+    BMP_WriteFile(res, "image_reconstruite.bmp");
+    printf("Image reconstruite sauvegardee dans 'image_reconstruite.bmp'\n");
+
+    BMP_Free(res);
+    detruire_recouvrement(rec);
     BMP_Free(original);
+    fclose(log_file);
     printf("\nToutes les tuiles ont ete traitees avec succes!\n");
     return 0;
 }
