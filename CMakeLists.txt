@@ -11,6 +11,8 @@ set(SOURCE_FILES
         qdbmp.h
         exemple_qdbmp.c
         main.c
+        recouvrement.c
+        recouvrement.h
 )
 
 # Ajouter l'exécutable
