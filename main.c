@@ -160,5 +160,22 @@ int main() {
     BMP_Free(original);
     fclose(log_file);
     printf("\nToutes les tuiles ont ete traitees avec succes!\n");
+
+
     return 0;
+}
+// Ouvre le fichier de configuration et retourne son pointeur + nb_tests
+FILE *ouvrir_fich_data(const char * nom_fich, int * nb_tests) {
+    FILE *f = fopen(nom_fich, "r");
+    if (!f) return NULL;
+    fscanf(f, "%d", nb_tests);
+    return f;
+}
+
+// Lit les données de la prochaine ligne (nom image, seuil, tuiles, garde, min)
+int lire_donnees_fich(FILE * fich, char * nom_image, double * seuil,
+                      int * nb_col_tu, int * nb_lig_tu,
+                      double * prop_garde, double * prop_min) {
+    return fscanf(fich, "%s %lf %d %d %lf %lf",
+                  nom_image, seuil, nb_col_tu, nb_lig_tu, prop_garde, prop_min) == 6;
 }
