@@ -181,3 +181,57 @@ void afficher_spectre(const t_spectre_gris *ptr_sp) {
                ptr_sp->seuil_lumin, ptr_sp->integrale_lumin_seuil);
     }
 }
+
+// Optimise la taille des tuiles pour minimiser les pixels non couverts.
+void calibrer_taille_tuile(BMP *original, int *nb_col, int *nb_lig) {
+    if (!original || !nb_col || !nb_lig || *nb_col <= 0 || *nb_lig <= 0) return;
+
+    UINT largeur = BMP_GetWidth(original);
+    UINT hauteur = BMP_GetHeight(original);
+
+    // Ajuste la largeur des tuiles.
+    int tuiles_largeur = largeur / *nb_col;
+    int reste_largeur = largeur % *nb_col;
+    if (reste_largeur > 0 && tuiles_largeur > 0) {
+        *nb_col += reste_largeur / tuiles_largeur;
+    }
+
+    // Ajuste la hauteur des tuiles.
+    int tuiles_hauteur = hauteur / *nb_lig;
+    int reste_hauteur = hauteur % *nb_lig;
+    if (reste_hauteur > 0 && tuiles_hauteur > 0) {
+        *nb_lig += reste_hauteur / tuiles_hauteur;
+    }
+}
+
+// Vérifie si deux tuiles se touchent (voisines).
+int tuiles_voisines(const t_tuile *tuile1, const t_tuile *tuile2) {
+    if (!tuile1 || !tuile2) return 0;
+
+    // Calcul des bornes de chaque tuile.
+    int gauche1 = tuile1->offset_col;
+    int droite1 = gauche1 + tuile1->nb_col;
+    int haut1 = tuile1->offset_lig;
+    int bas1 = haut1 + tuile1->nb_lig;
+
+    int gauche2 = tuile2->offset_col;
+    int droite2 = gauche2 + tuile2->nb_col;
+    int haut2 = tuile2->offset_lig;
+    int bas2 = haut2 + tuile2->nb_lig;
+
+    // Vérifie le chevauchement ou l'adjacence.
+    return !(droite1 <= gauche2 || gauche1 >= droite2 || bas1 <= haut2 || haut1 >= bas2);
+}
+
+// Copie une tuile dans une image résultat.
+void copier_tuile_a_image(BMP *imag_res, BMP *imag, const t_tuile *tuile) {
+    if (!imag_res || !imag || !tuile) return;
+
+    UCHAR r, g, b;
+    for (int y = 0; y < tuile->nb_lig; y++) {
+        for (int x = 0; x < tuile->nb_col; x++) {
+            BMP_GetPixelRGB(imag, tuile->offset_col + x, tuile->offset_lig + y, &r, &g, &b);
+            BMP_SetPixelRGB(imag_res, tuile->offset_col + x, tuile->offset_lig + y, r, g, b);
+        }
+    }
+}

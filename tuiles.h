@@ -1,8 +1,8 @@
 /**************************************************************
-PAR : Hugues Saulnier. Révisé par Eric Thé
+PAR : Hugues Saulnier. Rï¿½visï¿½ par Eric Thï¿½
 DATE: Hiver 2025
 
-Le module d'outils demandé dans la première partie du TP2.
+Le module d'outils demandï¿½ dans la premiï¿½re partie du TP2.
 
 Le module offre les types-struct : t_tuile, t_spectre_gris
 
@@ -36,58 +36,58 @@ Le module offre les fonctions suivantes :
 // merci Chai Braudo pour le beau petit module Quick n' Dirty BMP
 #include "qdbmp.h"
 
-#define  NB_FREQUENCES  256     //le nombre d'intensités et taille du spectre
+#define  NB_FREQUENCES  256     //le nombre d'intensitï¿½s et taille du spectre
 
 
 //**************************************************************
 //**************************************************************
-// DEUX TYPES ESSENTIELS dont voici les définitions
+// DEUX TYPES ESSENTIELS dont voici les dï¿½finitions
 
 /*
   LA TUILE
-  une tuile a une taille bien définie et occupe une position bien definie
-  dans un bitmap original. Elle est représentée par 5 entiers
+  une tuile a une taille bien dï¿½finie et occupe une position bien definie
+  dans un bitmap original. Elle est reprï¿½sentï¿½e par 5 entiers
 */
 typedef struct {
 	// les decalages dans l'image originale
 	int offset_col;		// decalage-colonne
 	int offset_lig;		// decalage-ligne
 
-	// sa taille véritable en pixels
+	// sa taille vï¿½ritable en pixels
 	int nb_lig;
 	int nb_col;
 
-	// son numéro unique dans l'énumération des tuiles d'une image
+	// son numï¿½ro unique dans l'ï¿½numï¿½ration des tuiles d'une image
 	int id_enum;
 } t_tuile;
 
 /*
   LE SPECTRE
-  c'est dans un spectre qu'on va conserver tout ce qui est pertinent à
-  la mesure de la luminosité d'une tuile
+  c'est dans un spectre qu'on va conserver tout ce qui est pertinent ï¿½
+  la mesure de la luminositï¿½ d'une tuile
 */
 typedef struct {
-	// la tuile dont est issu le spectre est conservé
+	// la tuile dont est issu le spectre est conservï¿½
 	t_tuile tuile;
 
-	// le tableau des fréquences de chaque teinte de gris dans la tuile
+	// le tableau des frï¿½quences de chaque teinte de gris dans la tuile
 	UINT spectre[NB_FREQUENCES];
 
-	// intégrale complète de la luminosité d'un spectre SANS seuil (= 0) obtenue
-	// de la somme des produits ((i/255.0) * spectre[i]) pour i allant de 0 à 255
+	// intï¿½grale complï¿½te de la luminositï¿½ d'un spectre SANS seuil (= 0) obtenue
+	// de la somme des produits ((i/255.0) * spectre[i]) pour i allant de 0 ï¿½ 255
 	double integrale_lumin_compl;
 
-	// les deux derniers membres sont associés à une mesure de luminosité seuillée
+	// les deux derniers membres sont associï¿½s ï¿½ une mesure de luminositï¿½ seuillï¿½e
 	double seuil_lumin;     // le seuil entre 0 et 1
 
-	// intégrale avec seuil, idem à l'integrale précédente sauf que tous les i tels
-	// que (i/255.0) < seuil_lumen ne seront PAS considérés dans la sommation
+	// intï¿½grale avec seuil, idem ï¿½ l'integrale prï¿½cï¿½dente sauf que tous les i tels
+	// que (i/255.0) < seuil_lumen ne seront PAS considï¿½rï¿½s dans la sommation
 	double integrale_lumin_seuil;
 } t_spectre_gris;
 
 
 //**************************************************************
-// LES DÉCLARATIONS DES 7 FONCTIONS DE CALCULS DE LA PARTIE 1
+// LES Dï¿½CLARATIONS DES 7 FONCTIONS DE CALCULS DE LA PARTIE 1
 //**************************************************************
 
 // Calcul du nombre de tuiles possibles dans l'image
@@ -96,13 +96,13 @@ int get_nb_tuiles(BMP *original, int nbcol_tuile, int nblig_tuile);
 // Initialisation d'une tuile avec sa taille
 void init_tuile(int nbcol_tuile, int nblig_tuile, t_tuile *tuile);
 
-// Positionnement d'une tuile spécifique dans l'image
+// Positionnement d'une tuile spï¿½cifique dans l'image
 int get_pos_kieme_tuile(BMP *original, int k, t_tuile *tuile);
 
-// Calcul de l'intégrale de luminosité avec seuil
+// Calcul de l'intï¿½grale de luminositï¿½ avec seuil
 double calcul_integrale_seuil_lumin(t_spectre_gris *ptr_sp, double seuil);
 
-// Création d'un spectre de luminosité pour une tuile
+// Crï¿½ation d'un spectre de luminositï¿½ pour une tuile
 t_spectre_gris *creer_spectre_tuile(BMP *original, const t_tuile *tuile);
 
 // Extraction d'une tuile sous forme de nouvelle image BMP
@@ -116,24 +116,34 @@ BMP *get_bitmap_gris_tuile(BMP *original, const t_tuile *tuile, double seuil_lum
 // Obtention de l'identifiant d'une tuile
 int get_id_tuile(const t_tuile *tu);
 
-// Obtention des décalages d'une tuile
+// Obtention des dï¿½calages d'une tuile
 void get_offsets_tuile(const t_tuile *tu, int *offset_x, int *offset_y);
 
-// Obtention de l'intégrale sans seuil
+// Obtention de l'intï¿½grale sans seuil
 double get_integrale_seuil0(const t_spectre_gris *ptr_sp);
 
-// Obtention du seuil utilisé
+// Obtention du seuil utilisï¿½
 double get_seuil_variant(const t_spectre_gris *ptr_sp);
 
-// Obtention de l'intégrale avec seuil
+// Obtention de l'intï¿½grale avec seuil
 double get_integrale_seuil_variant(const t_spectre_gris *ptr_sp);
 
-// Obtention de la tuile associée à un spectre
+// Obtention de la tuile associï¿½e ï¿½ un spectre
 void get_tuile(const t_spectre_gris *ptr_sp, t_tuile *tuile);
 
-// Affichage du spectre (pour débogage)
+// Affichage du spectre (pour dï¿½bogage)
 void afficher_spectre(const t_spectre_gris *ptr_sp);
 
+/* ======= Fonctions de la partie 2 ======= */
+
+//Assurer un meilleur ajustement de la tuile dans l'image originale
+void calibrer_taille_tuile(BMP *original, int *nb_col, int *nb_lig);
+
+//Indiquer si deux tuiles sont voisines
+int tuiles_voisines(const t_tuile *tuile1, const t_tuile *tuile2);
+
+//Copier le contenu d'un bitmap-tuile dans une image-resulat pixel par pixel
+void copier_tuile_a_image(BMP *image_res, BMP *imag, const t_tuile *tuile);
 
 
 #endif
