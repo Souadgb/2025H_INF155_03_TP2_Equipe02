@@ -44,8 +44,7 @@ void afficher_spectre_detail(const t_spectre_gris *ptr_sp) {
     }
 }
 
-
-
+// FONCTION MAIN //
 int main() {
 
       // OUVERTURE DE L'IMAGE //
@@ -60,9 +59,9 @@ int main() {
     //DÉFINITION DES TAILLES DE TUILES
 
     int tailles_tuiles[3][2] = {
-        {64, 64},   // 50x50
-        {125, 125},  // 100x80
-        {165, 165}  // 200x150
+        {64, 64},
+        {125, 125},
+        {165, 165}
     };
 
     srand(time(NULL));

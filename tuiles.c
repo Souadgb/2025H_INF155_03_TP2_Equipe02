@@ -166,7 +166,7 @@ double get_seuil_variant(const t_spectre_gris *ptr_sp) {
 double get_integrale_seuil_variant(const t_spectre_gris *ptr_sp) {
     return ptr_sp ? ptr_sp->integrale_lumin_seuil : -1.0;
 }
-// copie la tuile ssocié
+// copie la tuile associé
 void get_tuile(const t_spectre_gris *ptr_sp, t_tuile *tuile) {
     if(ptr_sp && tuile) *tuile = ptr_sp->tuile;
 }
